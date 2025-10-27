@@ -7,6 +7,11 @@ public class Player : MonoBehaviour
     public Rigidbody rb;
     public Transform cameraTransform;
     public GameManager gameManager;
+    private float speed = 1;
+    public int jumpForce = 100;
+    private int x = 0;
+    private bool isGrounded = false;
+
 
     void Update()
     {
@@ -19,7 +24,31 @@ public class Player : MonoBehaviour
         forward.Normalize();
         right.Normalize();
         Vector3 direction = forward * moveVertical + right * moveHorizontal;
-        rb.AddForce(direction * 5);
+        rb.AddForce(direction * speed);
+
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded == true)
+        {
+            Debug.Log("Space was pressed");
+            rb.AddForce(Vector3.up * jumpForce);
+        }
+
+
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
     }
 
 }
