@@ -9,16 +9,16 @@ public class LevelManager : MonoBehaviour
 
     public void LoadLevel1()
     {
-        SceneManager.LoadScene(level1.name);
+        SceneManager.LoadScene(level1);
     }
 
     public void LoadLevel2()
     {
-        SceneManager.LoadScene(level2.name);
+        SceneManager.LoadScene(level2);
     }
 
     public void LoadLevel3()
     {
-        SceneManager.LoadScene(level3.name);
+        SceneManager.LoadScene(level3);
     }
 }
