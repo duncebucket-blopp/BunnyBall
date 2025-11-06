@@ -7,10 +7,11 @@ public class Player : MonoBehaviour
     public Rigidbody rb;
     public Transform cameraTransform;
     public GameManager gameManager;
-    private float speed = 1;
+    public int speed = 1;
     public int jumpForce = 100;
     private int x = 0;
     private bool isGrounded = false;
+    private bool doubleJump = false;
 
 
     void Update()
@@ -30,9 +31,14 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Space was pressed");
             rb.AddForce(Vector3.up * jumpForce);
+            doubleJump = true;
         }
 
-
+        if (isGrounded == false && doubleJump == true && Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(Vector3.up * jumpForce);
+            doubleJump = false;
+        }
     }
 
     private void OnCollisionEnter(Collision other)
